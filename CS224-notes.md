@@ -60,7 +60,7 @@ Crack the little end of the egg (least significant byte (LSB) comes first). Exce
 
 0xdeadbeef reads in memory as ef -> be -> ad -> de (hex).
 
-` 
+```
 int main(int argc, char *argv[]) {
     unsigned ui = 0xdeadbeef
     string str = "Hello world!" //not sure this is correct
@@ -90,9 +90,118 @@ int main(int argc, char *argv[]) {
 
     //output
     str = Hello worFEDCBA // this is because we overwrote it with 0041424344454647
-    `
+```
 If you add one to a pointer, it thinks you want the second thing, as if this were an array of integers.
 
+## Jan 16
 
+### Do-While loops
+```
+do{
+} while(x)
+```
+does the code first, then checks the condition to know if it should continue.
+### Basic types from quiz
+In this class there are three basic data types we will work with in C:
 
+1. Integers
+
+2. longs (like an integer but can be larger in absolute value)
+
+3. Characters (single ascii characters like 'a', '1', or '?')
+
+Unlike in C++, C does not have a string data type. Instead of strings, C uses arrays of type char.
+
+C also does not have a bool type. Instead of using the Boolean True or False, C uses 0 as false, and not 0 (default 1) as true. So any math in an if statement or other conditional statement is looking to see if the value it is checking is 0 (false) or not 0 (true). Any conditional statements that use >,<,>=,<=,== act the same as in C++ but remember they are not resolved into a true or false, but a 1 or 0. 
     
+### Scanning and Printing from quiz
+
+In C the way we read and print from/to standard in (stdin) is using scanf and printf statements. 
+
+These statements have the following format:
+
+scanf("format string", address of variables);
+
+printf("format string", variable names);
+
+What are format strings? They are a % followed by a character that denotes the type of data you are trying to scan or print. Any format strings will be associated with a variable on the right side of the statement. The scanf statement requires addresses of variables (use &x to get the address of x) you want to set to the scanned value.
+
+Common format strings include:
+
+%d for decimals (ints)
+
+%c for characters
+
+%s for strings (remember there is no string type. We will talk more about this later)
+
+
+Statement examples:
+
+scanf("%d", &x);    (scans an integer and sets the value of x to that integer)
+
+scanf("%d %c", &num, &letter);    (scans a decimal into num and a char into letter)
+
+printf("this is the value of x: %d", x);    (would print out "this is the value of x: #" where '#' is the value of x)
+
+printf("letter:number - %c:%d", letter, num);    (would print out "letter:number - A:#" where 'A' is the value of letter and '#' is the value of num)
+
+### Arrays and "strings" from quiz
+
+We declare arrays in C the same way we do in C++. However, C does not keep track of the size we declared for an array. This is a fact we will learn more about and learn to exploit later in the class.
+
+Since C does not have a string type we use char arrays to hold groups of characters. When a scanf or printf statement uses the afore mentioned %s format string then you need to give it a character array as the associated variable, scanf will then input the string into the array up to the first white space. (side note about arrays and scanf: because of the way arrays work in C you do not need to put a '&' in front of an array name in the scanf statement to get the address of the array. You can think of an array variable as a "pointer" to the start of the array so it is already an address)
+
+### Fun (?) - example from lab 2
+
+```
+#include <stdlib.h>
+#include <stdlib.h>
+
+int main(int argc, char*argc[]) {
+    int inputs[5] = {0,0,0,0,0}; //you can initialize it either way
+    int i = 0; //traditionally, declare all your variables up front
+
+    scanf("%d %d %d %d %d", inputs, inputs+1, inputs+2, inputs+3, inputs+4); //you can also take the address using &inputs[1]
+
+    for(i=0; i<sizeof(inputs)/sizeof(int); ++i) {
+        printf("inputs[%d] = %d\n", i, inputs[i]);
+    }
+    return 1;
+}
+```
+
+Then compile, consider using: `gcc -Wall -g -o fun fun.c`. The -g sets up the debugger. The -o fun renames the out file.
+remember, you can give it input with `fun < input.txt` or try `cat input.txt | fun`. If the current directory is not in your search path, use `./fun`.
+
+### Debugger gdb
+
+To turn on the debugger: `gdb fun` and `quit` to get out. To make your up and down arrows work in command prompt window use `focus cmd`. Add a break point with `break 22` where 22 is the line number. Type 'run' to run the program. `p /s value` will print the desired value at the point you want. `x /x` is the actual contents of memory (addresses). `n` steps forward. 'c' is continue.
+
+### Less fun example
+Say in the above code you chance it to:
+```
+int *inputs = NULL;
+
+//then add
+int num_inputs = 0
+if (argc != 2) {
+    return 1;
+}
+printf("argv[0] = %s\nargv[1] = %s\n", argv[0], argv[1]);
+num_inputs = atoi(argv[1]);
+
+inputs = malloc(num_inputs * sizeof(int));
+
+for (i=0, i < num_inputs; i++){
+    scanf("%x, inputs+i);
+}
+
+for(i=0; i<sizeof(inputs)/sizeof(int); ++i) {
+        printf("inputs[%d] = %d\n", i, inputs[i]);
+    }
+
+printf("inputs[%d] = %d\n", i, inputs[i]);
+// what numbers can you input that will output "hello world" when they are transformed to characters above.
+free(inputs); //what you malloc you should free)
+```
+DRAW MEMORY. So you understand what is going on.
