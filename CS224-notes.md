@@ -205,3 +205,28 @@ printf("inputs[%d] = %d\n", i, inputs[i]);
 free(inputs); //what you malloc you should free)
 ```
 DRAW MEMORY. So you understand what is going on.
+
+## Jan 21 - Prepare for Project 1
+
+### xxd
+Project 1 is to imitate behavior of xxd. Use xxd to figure out correct output and then test it. Implement both bits and hex.
+
+All this information is in the write up so don't worry.
+
+xxd - a program that outputs raw data. It takes a file (any type), opens it, and reads bytes. Outputs as Hex or binary. 
+Made out of segments. `ctrl d` gets you out of interactive mode - means end of input. `ctrl c` on the other hand sends `sig kill` to shut down a running process. 
+- Seg 1: `00000010:` - an index into an array of bytes. 16 base 10.
+- Seg 2: hex - `7574 2064....` 
+- Seg 3: `This is some inp`
+
+echo - `"echo this" | xxd` Use piping to give input, do small tests on your program.  
+
+cat - reads file pipes it `cat xxd | myxxd.md`
+
+or `xxd < myxxd.md`
+
+You need some way to compare your output with xxd's. Use `diff`. It takes two files and compares to see if they are the same byte for byte. No output = they are the same. 
+
+To see large output, pipe it into `less` so you can scroll up and down.
+
+You need a function that takes byte and gives a string of ones and zeros - bytes to bits. Algorithm: 13 -> 13%2 = 1 -> 13/2 = 6 -> 6%2 = 0 -> 6/2=3 -> 3%2=1. So answer is reversed - 01101
