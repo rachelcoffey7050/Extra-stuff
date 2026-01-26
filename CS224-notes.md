@@ -225,8 +225,28 @@ cat - reads file pipes it `cat xxd | myxxd.md`
 
 or `xxd < myxxd.md`
 
-You need some way to compare your output with xxd's. Use `diff`. It takes two files and compares to see if they are the same byte for byte. No output = they are the same. 
+You need some way to compare your output with xxd's. Use `diff`. It takes two files and compares to see if they are the same byte for byte. 
+No output = they are the same. 
 
 To see large output, pipe it into `less` so you can scroll up and down.
 
-You need a function that takes byte and gives a string of ones and zeros - bytes to bits. Algorithm: 13 -> 13%2 = 1 -> 13/2 = 6 -> 6%2 = 0 -> 6/2=3 -> 3%2=1. So answer is reversed - 01101
+You need a function that takes byte and gives a string of ones and zeros - bytes to bits. 
+Algorithm: 13 -> 13%2 = 1 -> 13/2 = 6 -> 6%2 = 0 -> 6/2=3 -> 3%2=1. So answer is reversed - 01101
+
+## Jan 26
+
+Homework is on interpreting memories. It will draw it in a variety of ways and directions. So pay close attention! 
+It doesn't matter how memory is drawn as long as you keep track of endianess. The Lab is longer because it has a lot of questions to give you practice.
+
+06 13 10 15
+01 6d af
+Convert Binary to Hex - convert to base 10 which goes to hex (or memorize the conversion). When you have left over it can be replaced by zeros.
+
+8 bytes for the array.
+4 bytes per int.
+It's reading in as hexadecimal is bytes. Reads left one in backwards. 
+Read in as: `array, array+1, array+2, array+3` +1 means array start plus size of item (int).
+Undos the endianess when you print: 64616564. It will print out the same as when in when its the same type.
+Ignores leading zeros so 00000021 -> 0x21.
+When you interpret as characters it turns into dead.
+same thing
