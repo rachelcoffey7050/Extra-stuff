@@ -219,7 +219,82 @@ So final means you can't inherit from it, abstract means you must inherit from i
 
 ### Interfaces
 
-Class can implement an interface this is the way to get around only being able to have one parent. other classes inherit from interface. By definition they are all public and abstract. A class can implement as many interfaces as you want.
+Class can implement an interface this is the way to get around only being able to have one parent. other classes inherit from interface. 
+By definition they are all public and abstract. A class can implement as many interfaces as you want.
 You can even create a sub-interface. 
 
 Practically, it means we can get ride of duplication. Create an abstract class that extends the interface, and then extend for your classes.
+
+## Jan 26
+
+### Copying objects
+Shallow copy - copy variable values (so they both point to the same thing).
+
+Most often you want a deep copy. If an object is immutable you don't need to copy it, but mutable objects need to be deep copied.
+
+Deep copies: copy constructor and clone method.
+```
+Faculty profCopy = new Faculty(prof)
+
+Faculty progCopy2 = prof.clone();
+```
+Implementing clone putting a copy constructor within the class:
+```
+public Course clone(){
+  return new Course(this);
+}
+```
+In order to create a copy constructor, you need to iteracte over the students and courses calling new with their own copy constructors.
+
+### Exceptions
+You don't do a lot of error handling in school because you don't need to handle all the errors for the test. But in the real world, it is super important. 
+One source of error: bugs. In that case, just fix your bugs. 
+Write tests for things you can't control: bad input, broken dependancy, out of memory, stack overflow, bad internet connection.
+
+**Handle or Declare Rule:**
+Applies to Checked exceptions (not runtime exceptions or errors). 
+```
+// handle - lets you continue
+try {
+} catch(Exception ex) {
+}
+// declare - just tells you it could throw exception.
+public void method() throws Exception {
+}
+```
+Java forces you to handle exceptions correctly. If an excpetion is thrown, you must catch it.
+Put try-catch in main to catch errors that are thrown in other methods - catches anything that leaks out.
+
+You can only throw objects, not primitives. Use try-catch on Exceptions (not errors) that are not runtime exceptions.
+- Exception
+  - IO exception and others. If you don't handle these correctly Java gets mad.
+  - RuntimeException - you have a bug. Java doesn't check these.    
+- Error. Catastrophic. Ignore, there is nothing we can do about out of memory.
+
+Example - this function throws filenotfound. You either need to handle it or declare it now and handle it in main. 
+Printing the stack trace is one option.
+```
+private static void processFile(File file) {
+scanner scall = null;
+scan = new Scanner(file);
+}
+//this gives a redline error
+
+```
+**Finally Clause:** execute it every time, no matter what happens with the excpetion. You can use this to close the scan. 
+An even easier way is the try with resource. 
+`try (Scanner scan = new Scanner(file)){}` It will handle closing the scanner for you.
+
+You can create a custom exception class. 
+
+### Java Collections
+When regular arrays don't suffice.
+
+Implementations of helpful algorithms are on collections - sort, shuffle. Collections can only store objects, not primitives. 
+
+Sets (hash set, tree set), maps (hash map, treemap, linkedhashmap)(entryset() is a useful method that gives all key values pairs), iterators, queue (array deque, priority queue, linked list), stack (performance issues, don't use)
+
+Equals - what definion do I want? If your equals or hash code doesn't work right, the collection won't work.
+
+Sorted collections - treeSet (BST), TreeMap (BST), PriorityQueue (binary heap) are all sorted. So the objects need to be comparable. May need to override a compareTo method to rank them. This would also allow you to sort them using Java's sort algorithms.
+
