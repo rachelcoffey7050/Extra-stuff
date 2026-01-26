@@ -298,3 +298,5 @@ Equals - what definion do I want? If your equals or hash code doesn't work right
 
 Sorted collections - treeSet (BST), TreeMap (BST), PriorityQueue (binary heap) are all sorted. So the objects need to be comparable. May need to override a compareTo method to rank them. This would also allow you to sort them using Java's sort algorithms.
 
+Can't change an object in a tree or hash table. You need to remove, change, and then put it back in. (Because changing the object changes the hash code or position. 
+
