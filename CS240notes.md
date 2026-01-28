@@ -300,3 +300,43 @@ Sorted collections - treeSet (BST), TreeMap (BST), PriorityQueue (binary heap) a
 
 Can't change an object in a tree or hash table. You need to remove, change, and then put it back in. (Because changing the object changes the hash code or position. 
 
+## Jan 28
+
+### Phase 1
+Extension of phase 0. Implement the Chess Game class - check, checkmate, stalemate, etc. Extra credit - castling and one other. 
+
+We will start doing I/O.
+
+### I/O
+
+**The File Class** - a wrapper around a file path. Has methods exixt, createnew, delete, etc.
+
+**Stream Model** - reading and writing from files. Binary or text formatted. 
+Input and Output stream for bytes (think image, audio, etc), reader and writer for characters in text format.
+- input stream - file, piped, websites. decompressing data (zip file), decrypting data, computing a digest/hash of the stream, byte or line counting, buffering (process in chunks)
+- Output stream - compress, encrypt, generally the opposite of above. `file.compressFile()`
+- binary output: write as primary data types like doubles, int, etc. `DataOutputStream` class lest you write this type of data.
+
+**Readers and Writers** - are the same as input/output but for characters.
+- printWriter lets you write text formatted data values (int, float, boolean, etc)
+- Scanner lets you read text formatted data values. Super important. Delimiter: can customize to skip comments and sequences of whitespace
+- to convert from Reader/Writer to input/output stream (when you want to treat the data as text) use conversions
+
+**Other ways** 
+- Random Access File - not accessing sequentially. Moves a pointer to a paticular index where you want. Overwrites rather than inserts.
+
+### JSON
+Javascript Object notation. Represents data so we can transfer, store, or share it.
+It has a tree structure. Object has items like strings, arrays, which can themselves hold objects.
+
+Pick a JSON parsing library instead of processing it character by character. These libraries also handle creation of JSON files.
+There are 3 types of parsers. Most libraries provide all three:
+- Stream parsers - tokenizer. returns one token at a time. Most basic parser, but needed for some edge cases.
+- DOM parsers - or a tree parser. Document object model. Parses the whole file and gives you back a tree (which you have to traverse). Can use to hop around
+- Serializers/Deserializers - converts back and forth to a Java object. Easiest and most popular.
+```
+Gson gson = new GsonBuilder().setPrettyPrinting().create();
+gson.toJson(catalog);
+```
+**Type Adapters**Gson has some limitations, so sometimes you have to give it some help. When you reach this, you won't be able to adapt it, so do this instead.
+- if you wrote the pieces as subclasses of ChessPiece, you will need to write a type adaptor.
