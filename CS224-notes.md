@@ -248,5 +248,15 @@ It's reading in as hexadecimal is bytes. Reads left one in backwards.
 Read in as: `array, array+1, array+2, array+3` +1 means array start plus size of item (int).
 Undos the endianess when you print: 64616564. It will print out the same as when in when its the same type.
 Ignores leading zeros so 00000021 -> 0x21.
-When you interpret as characters it turns into dead.
-same thing
+When you interpret as characters it turns into deadbeef.
+decimal value is a large number.
+
+## Jan 28 - endianess
+Endianess - for multi-bytes things. It decodes the order of bytes in a mutli-byte thing.
+Does not affect the bit order.
+
+Big-ediam machines (IBM Power) store the byte of largest significance (ie the first letters of the word) first. 
+Little-endian machine (Intel, AMD, ARM, m-series) store the byte of least significance first (ie the last letters of the word).
+
+Point: if you overwrite a variable with a larger value, it could corrupt memory.
+
