@@ -260,3 +260,39 @@ Little-endian machine (Intel, AMD, ARM, m-series) store the byte of least signif
 
 Point: if you overwrite a variable with a larger value, it could corrupt memory.
 
+# Jan 30
+**Converting:** 
+`1101 -> 1*2^3 + 1*2^2 + 0*2^1 + 1*2^0 = 8+4+0+1 = 13 (d)`
+
+### Adding
+overflow. 1+1 = 2 which is 10 in binary. Carry the one.
+`1011 + 0110 = 1 0001`. Which is 11+6 = 1. Binary does not follow the same rules as the natural numbers.
+Range changes based on the hardware.
+3 in binary is 11.
+
+**Adding in hex**:
+`e+b (14+11) = 25 = 1 9 (16+9)`. Carry the 1. 26 = 1 a
+
+**Adding natural numbers**
+0010 + 0011 = 0101
+1010 + 0100 = 1110
+0111 + 1000 = 1111
+
+**Adding integers**
+Most significant bit gets a negative weight. So `1*-2^3` so 1101 becomes -3.
+if they are all ones left of the 3rd ie in 1101 then you can just take the 3rd digit as the negative. 
+
+Converting from positive to negative: 0111 = 7
+1. invert all bits (1000)
+2. add one. (1001 = -7)
+Ranges are asymmetric. unsigned goes from 0 to (2^n)-1. signed goes from -2^(n-1) to (2^n-1)-1. for example n=5: 0-31 vs -16-15.
+Can overflow from the other side, too.
+
+`0x%x%x/n", (unsigned)(*str));`
+Figure out what units it is supposed to be in, and figure out how the data needs to be converted.
+Sign extension - how do I turn one byte into 4 bytes. If it is unsigned, 0 fill. if signed, you extend it by copying. so 0 or f depending on if positive or negative.
+
+
+
+
+
