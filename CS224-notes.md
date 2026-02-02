@@ -260,7 +260,7 @@ Little-endian machine (Intel, AMD, ARM, m-series) store the byte of least signif
 
 Point: if you overwrite a variable with a larger value, it could corrupt memory.
 
-# Jan 30
+## Jan 30
 **Converting:** 
 `1101 -> 1*2^3 + 1*2^2 + 0*2^1 + 1*2^0 = 8+4+0+1 = 13 (d)`
 
@@ -292,7 +292,36 @@ Can overflow from the other side, too.
 Figure out what units it is supposed to be in, and figure out how the data needs to be converted.
 Sign extension - how do I turn one byte into 4 bytes. If it is unsigned, 0 fill. if signed, you extend it by copying. so 0 or f depending on if positive or negative.
 
+## Feb 2
 
+### Type Casting
+Widening - taking something that is one byte and making it more (ie 4 bytes, an int). It does not change the value (trust the process). 
+Add 1s if negative and 0 if positive.
+Widen according to the type and then apply the cast.
+- `*((int*)u_str)`-> taking an unsigned char and interpreting it as an int -> keep going for 4 deadbeef
+- `(unsigned)(*u_str)`-> taking an unsinged char and making it unsigned -> ef - 000000ef
+- `(int)(*u_str)`-> taking an insigned char and extending it to an int -> ef (ignores leading 0s) it widens it before it interprets it, during dereferencing
+- `(unsigned)(*str)`-> taking a signed char and making it unsigned -> ffffffef when you print, but its a large positive number
+- `(int)(*str)`-> taking a signed char and extending it to an int -> ffffffef when you print, but it is a negative number
+- `(unsigned)(*ptr_us)` -> beef -> widen with 0s that disapear.
+- `(unsigned)(*(ptr_us + 1))` -> dead
+- `(int)(*ptr_us))` -> beef
+- `(int)(*(ptr_us + 1)` -> dead
+- `(unsigned)(*ptr_s)` -> ffffbeef -> because be is 1001 a negative number
+- `(unsigned)(*(ptr_s + 1))` -> ffffdead
+- `(int)(*ptr_s))` -> ffffbeef
+- `(int)(*(ptr_s + 1)` -> ffffdead
 
+Narrowing - the opposite. You will lose information. 
+- `(unsigned short)(*ptr_i)` - beef
 
+### bitmap project
+Turn image into grayscale and threshold. Mutating the pixels to change the colors.
+
+```
+gcc -g -Wall -o bmpFilter solution-bmpFilter.c
+bmpFilter -h image name
+```
+has filters -g for grayscale and default for threshold.
+use diff and > to pipe in image and check for differences.
 
