@@ -340,3 +340,35 @@ gson.toJson(catalog);
 ```
 **Type Adapters**Gson has some limitations, so sometimes you have to give it some help. When you reach this, you won't be able to adapt it, so do this instead.
 - if you wrote the pieces as subclasses of ChessPiece, you will need to write a type adaptor.
+
+## Feb 2 - design principles
+
+read phase 3 by next Monday
+
+### Nested Classes
+Used for limiting scope. 
+If it is static, it does not have special access to methods in the outer class. Otherwise, you don't have to pass in the array.
+
+Annonymus inner class - If you only call it in one place, you don't even have to give it a name, just put it where it it's called. Also called event-handlers.
+
+### Generics
+Generic Types, or templetes are used in strongly-typed languages. Usually these are compiled languages.
+
+For example, pairs. If you want to have a function return 2 values, you need to create a pair class. This class can hold a pair of any two types - objects, not primitives. 
+
+var - infers the type of what you're instantiating based on context of your instance. 
+
+Specify types in extends class so you don't have to type it every time. 
+
+generic interface - ie passing a function to a function. 
+One aspect of functional programming. Higher-order functions.
+
+Wildcards - use <? super T> or <? extends T> instead of the type. So you can pass in T or a superclass of T or an inheritor of T.
+
+### lambda
+An inline function. 
+` (first, second) -> Integer.compare(first.lenghth(), second.length())` you could store this in a variable if you wanted to use it more than once.
+It gets converted into an anynonymus inner class.
+Must be a functional interface - such as comparable, runnable, callable (runnable with return value), etc.
+Syntax - `(parameter list) -> Body` If there is only one parameter, you can leave off parenthesies. You can put {} around body and make it a regular method body. 
+Or you can make it a one-line expression. In that case you don't need {}, return, or anything else.
