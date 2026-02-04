@@ -372,3 +372,66 @@ It gets converted into an anynonymus inner class.
 Must be a functional interface - such as comparable, runnable, callable (runnable with return value), etc.
 Syntax - `(parameter list) -> Body` If there is only one parameter, you can leave off parenthesies. You can put {} around body and make it a regular method body. 
 Or you can make it a one-line expression. In that case you don't need {}, return, or anything else.
+
+## Feb 4 - Design Principles
+
+Goal - create systems that:
+- work and satisfy customers
+- are easy as possible to understand and maintain
+- hold up well under changes
+
+Don't repeat yourself ~ break into chunks ~ each class or method does one thing
+
+### Principle 1: Design is iterative
+
+You won't figure it out every single detail before you start coding, just the basic architecture. When you encounter problems coding, do more design work.
+We won't deal with this principle in class because the structure is given to us - we don't know what a good structure is. So observe the structure closely.
+
+### Principle 2: Abstraction
+To cope with complexity. You can drive a car without knowing how it works internally. 
+Create new abstractions - new classes that contain more functionality. 
+A lot of coding concepts don't exist in the real world like hash tables but represent that sort of data.
+
+You can't fully represent the real world object. Different aspects of a person will matter in different contexts since you can't include everything.
+
+### Principle 3: good naming
+We need to name a lot of stuff. Packages, files, classes, variables, functions. You will have to live with the names you choose. Very important.
+Part of abstraction.
+
+Naming classes - noun.
+Methods - verb or noun of what it returns.
+
+### 4 Single responsibility principle
+A class has one responsibility. That means you only need to change it in rare cases, if there is a single reaons you might need to change it.
+
+For example, KingMoves calculates the moves a king makes. ChessPiece holds data to represent a piece. 
+
+If a function needs to do three things, then break it into three functions called by the main function. 
+Use decomposition until you only have one problem to solve.
+
+### Principle 5: Decomposition
+Break it into pieces until the pieces are small enough to solve.
+You're done decomposing when it would be ridiculous to go further. Single responsibility principle.
+Size is a good metric to help you know if you need to break it up.
+This is the process by which we discover the abstraction.
+
+### 6 Algorithm and Data Structure Selection
+No amount of decomposition or abstraction will hide a flased section of algorithm or data structure.
+That is the heart of good programming.
+
+### 7 Access
+Minimize the amount of classes a class interacts with or knows about.
+
+Encapsulation (infromation hiding). Each class hides what it's doing. Visibility modifyers. Use private and protected as often as possible.
+Name it in a way that hides functionality such as "classRole" rather than "studentLinkedList". Unless it matters that it is implemented in a paticulary way.
+
+Use interfaces - access through interface which doesn't allow you to access the internal variables and methods.
+
+If you don't need to, don't declare specific type
+
+### Don't duplicate code.
+No copy and paste programming. That copies bugs and problems. 
+
+Copied code indicates an important abstraction. 
+
+Make the code as readable and maintainable as possible. If they might drift apart over time, they aren't really the same thing.
