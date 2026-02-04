@@ -325,3 +325,18 @@ bmpFilter -h image name
 has filters -g for grayscale and default for threshold.
 use diff and > to pipe in image and check for differences.
 
+## Feb 4
+
+Purpose of the bitmap project is to reinforce modulization (creating small functions).
+You should never had a function more than 15 lines of code or more than 2 nested deep. 
+This might mean you have to pass lots of variables down, which indicates you should put them into a more complex object.
+
+-g for grayscale, nothing for threshold. 
+In C, make sure to free things that go on the heap (when you call new). 
+
+Find the size of DIB header/where the pixel array starts. First header is a total of 14 bytes. bmpfiles + offset. Offset = bmpfile(byte) + 10 (units).
+Pull out the width and the height of the image. Than you can used those to iterate through all the pixels.
+
+Image is stored in row major order, meaning the pixels in the same row are stored in one chunk, in the right order.
+Each pixel is 3 bytes (r,g,b). Each row needs to be a multiple of 4 bytes. So we add padding.
+Padding holds no real information, it just helps with layout. width*3+padding = next row.
