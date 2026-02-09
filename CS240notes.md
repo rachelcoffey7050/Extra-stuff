@@ -435,3 +435,44 @@ No copy and paste programming. That copies bugs and problems.
 Copied code indicates an important abstraction. 
 
 Make the code as readable and maintainable as possible. If they might drift apart over time, they aren't really the same thing.
+
+# Server Design
+## Feb 9
+Phase 2 is doable in a couple hours.
+This is the most important learning part of the class.
+
+Most of server is implementing a web API. 
+client -> web -> chess server (http request) 
+<- http response comes back
+server has website (for testing services) and web API - the web browser calls both. the console client and test driver call web API
+There is a web page in the starter code that demonstrates what is happening, you will have to edit it a bit. 
+
+Read Phase 3 and Phase 2 spec.
+
+Remember - single responsibility principle, avoid code duplication, encapsulations. Write it so you could change with only modifying a few files.
+
+**Data** you need to keep track of:
+- game - this points to the code you've written (Chess Game). Keeps track of name and which players are playing each side.
+- Add an auth token (string that represents current user session) this tells the server when you log in.
+- user
+
+### Design the server:
+A webAPI function is called an endpoint. endpoints:
+- clear. used for debugging. whipes the server
+- register. body in JSON format. sucess returns authToken.
+- login
+
+**Decomposition:**
+Responsibilities: 
+- represent the data. model classes hold data, modeling domain of application. Add User, Authtoken, game. Very simple. SHARED
+- store and retrieve data. Stored in mySQL. classes support the queries that you need. ie UserDAO with createUser, getUser, etc. SERVER
+- Service classes - user service (calls tegister, login, logout), game service (create result, join result, list result), clear service SERVER
+- request/result - modeling what information is flowing accross the server. SHARED
+- handler classes - communication. recieves request and passes it to appropriate service SERVER
+- server - recieves a request and sends it to correct handler SERVER
+- clear does not need a request class associated with it.
+
+If you need an example, go to pet shop. Try to understand and apply. 
+We need handlers and services because of single responsibility principle.
+Working is required in diagram but it would be good to also add error handling. 
+May need a base class for handlers, services, DAO
