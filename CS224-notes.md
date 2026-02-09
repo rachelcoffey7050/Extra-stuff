@@ -1,4 +1,9 @@
 # Introduction
+Hex : Binary
+0 → 0000 4 → 0100 8 → 1000 C → 1100
+1 → 0001 5 → 0101 9 → 1001 D → 1101
+2 → 0010 6 → 0110 A → 1010 E → 1110
+3 → 0011 7 → 0111 B → 1011 F → 1111
 ## Jan 9
 We need others in our lives to become perfected. We will need help and we need to help others. You are not going to learn all you can if you are not part of the class community.
 - participate in class (be engaged)
