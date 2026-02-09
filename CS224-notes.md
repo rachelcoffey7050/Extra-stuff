@@ -340,3 +340,42 @@ Pull out the width and the height of the image. Than you can used those to itera
 Image is stored in row major order, meaning the pixels in the same row are stored in one chunk, in the right order.
 Each pixel is 3 bytes (r,g,b). Each row needs to be a multiple of 4 bytes. So we add padding.
 Padding holds no real information, it just helps with layout. width*3+padding = next row.
+
+## Feb 9
+### Free points: Problem 1
+Consider a 5-bit machine that supports both signed and unsigned
+arithmetic.
+On this machine both int and unsigned are encoded using all 5-bits.
+Assume as well that two’s-complement encoding is used for the signed
+values.
+Fill in the missing entries in the following table, where:
+• Umin indicates the minimum possible unsigned value
+• Umax indicates the maximum possible unsigned value
+• Tmin indicates the minimum possible int value
+• Tmax indicates the maximum possible int value
+Number/Type Decimal Value Binary Encoding
+- Umin - 0                  0 0000
+- Umax - 31                 1 1111
+- Tmin - -16                1 0000
+- Tmax 15                   0 1111
+- Umin-1 - 31 00000-11111 = 1 1111
+- Tmin-1 - 15               0 1111
+- -Tmin - -16               1 1010*maybe
+- Tmax+Tmax -2              1 1110
+- int -11                   1 1110
+- int - -16                 1 1010
+
+### bit shifting
+shifting left means multiplying by two.
+Fill in the following table showing the effects of the different shift
+operators on single-byte quantities. Each of the answers should be 8
+binary digits or 2 hexadecimal digits. Note that the third column is
+a logical right shift operator, while the rightmost column is an
+arithmetic right shift operator.
+- x                  x << 1 (Logical) x >> 5 (Arithmetic) x >> 5
+- Hex Binary         Binary   Hex     Binary Hex Binary Hex
+- 0xcb 1100 1011  1 1001 0110 96
+- 0x64 0110 0100  1100 1000   C8
+
+### Masking - 
+sets or unsets specific bits. 
