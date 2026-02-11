@@ -476,3 +476,48 @@ If you need an example, go to pet shop. Try to understand and apply.
 We need handlers and services because of single responsibility principle.
 Working is required in diagram but it would be good to also add error handling. 
 May need a base class for handlers, services, DAO
+
+## Feb 11
+
+chess server review: all of these things are called through http. 
+Initialted when the client established a network connection with the server. (a pipeline that allows them to send data back and forth).
+Every machine has an IP address, which like a phone number is needed to connect. We use a domain name as a placeholder for the domain name. 
+Client must also know desired program - which is why we need a port number. default is 80 for http 443 for https 25 is email.
+
+### HTTP: 
+hypertext protocol: specification for how information is sent
+
+To do anything on the web you need a URL - has everything you need to request a resource from a server. protocol, domain, port number, path.
+In the request: method, path, http version, headers. Request types (methods): GET, POST (send), PUT (modifying), DELETE.
+Headers: as many as you want. Labels it with additional information you want to pass on. Such as what type of file to accept, what ecoding you accept (gzip, deflate), User Agent
+
+Server responds: http version, status code, reason phrase (associated with status code), content-type, content length (in bytes), last modified, empty line, response body (what you requested ie png image bytes).
+status codes: 200s is success. 400s is client error, 500s is server error
+
+### web APIs
+calling a function. 
+```
+GET /event/12345 HTTP/1.1
+Authorization: fgnawqi3u9384weifn5
+```
+the bottom line is the auth token. 
+Use same methods as to browse the web to call functions and get information.
+
+Response is a JSON object containing event data.
+
+Post request: how html forms work not google search. post has data appended to it. but hypothetically google would return to a post request a web page with a list of web pages.
+most of what we'll do in this class is making post requests.
+
+### Curl
+one way to debugg your web api
+`curl byu.edu` doesn't work -> write `curl https//:byu.edu` then it gives you back the entire webpage.
+Adding -v (verbose) gives you more info. -X GET speficies request. GET is default.
+
+### postman
+a graphical interface to do what curl does. will have to make an account and create requests.
+Can use it inside of vscode (so not in this class).
+
+### where to start in Phase 3
+you know enough to write the model, data access, and much of the service classes.
+Start on the back end.
+Best way to code is to write everything for one function, like login, but we haven't learned enough. After Tuesday, do that. 
