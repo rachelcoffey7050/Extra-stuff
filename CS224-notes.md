@@ -384,3 +384,30 @@ arithmetic right shift operator.
 
 ### Masking - 
 sets or unsets specific bits. 
+
+
+## Feb 11 floats
+binary byte 101.101 -> 2^2, 2^0, ., 2^-1, 2^-3.
+3.12 x 10^3 = 3120, 3.12 x 10^-2 = 0.0312 -> so you can use the multiplyer to shift the binary point.
+Normalized means it has a single leading 1 as in 1.00101101 x scaling factor. So it will be [1.0,2.0) in the normalized form.
+
+float: 1 bit signed, 8 bites exp (used to compute the exponent), fractional 23 bits (don't store the 1).
+The exponent bits are not all 0s or 1s. `E = exp - bias` where the bias is `2^e-1 - 1` and e is the number of exponent bits.
+Need to use algebra to figure out the exp. Largest weight you can have is 2^127.
+13 3/4 = 1101.11 x 2^0 = 1.10111 X 2^3. 3 = exp - 127. exp = 130. encoding 0 1000 0010 1011 10... (sign, exp, 23 bits, 0 to fill)
+
+Denormalized form: exponent bits are all zero and bias has defined meaning. 
+-126. x2^-126.
+
+special values: if all the exponent bits are 1s. if M=0 then infinity otherwise NaN
+
+example: 
+1111 -> 1.11 x 2^15 = 36044.8
+1.1 x 2^-15 = -36044.8
+0000 -> 1.1 x 2^0 = 1 7/8
+1.1 -
+denormalized min: 1 0000 111 (7/8 * 2^-6)
+denormalized max: 0 1110 111 ()
+nearest to 0 - 1/8* 2^-6
+
+There are a lot of real and even rational numbers that we can't represent. There are rounding errors. So when you write code with floats, you must think about imprescion.
