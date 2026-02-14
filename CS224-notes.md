@@ -411,3 +411,21 @@ denormalized max: 0 1110 111 ()
 nearest to 0 - 1/8* 2^-6
 
 There are a lot of real and even rational numbers that we can't represent. There are rounding errors. So when you write code with floats, you must think about imprescion.
+
+## Feb 13
+ example similar to lab: 
+ `x=0x12345678.`
+ mask out the 6th nibble which is 3.
+ `0x0f & (x>>20)`
+
+### more floating point practice
+5 bit representation: 1 sign but, 2 exponent, 2 fraction (mantissa)
+e: exponent bits decimal value.
+E: biased value - biasing after. 
+2^e: weight.
+f: value of the fraction. (as they appear, ignores implied 0)
+E = exp - bias
+m: significand. first determine normalized/denormalized. normalized 1+fraction. denormalized 0+fraction
+m x 2^E.
+32 patterns: 1 11 ^11 -> 3/4 * 
+bias: 2^e-1 -1 = 1
