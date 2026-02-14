@@ -418,14 +418,15 @@ There are a lot of real and even rational numbers that we can't represent. There
  mask out the 6th nibble which is 3.
  `0x0f & (x>>20)`
 
-### more floating point practice
+### floating point terms
 5 bit representation: 1 sign but, 2 exponent, 2 fraction (mantissa)
-e: exponent bits decimal value.
-E: biased value - biasing after. 
-2^e: weight.
-f: value of the fraction. (as they appear, ignores implied 0)
-E = exp - bias
-m: significand. first determine normalized/denormalized. normalized 1+fraction. denormalized 0+fraction
-m x 2^E.
-32 patterns: 1 11 ^11 -> 3/4 * 
-bias: 2^e-1 -1 = 1
+- e: exponent bits decimal value.
+- E: biased value - biasing after. 
+- 2^e: weight.
+- f: value of the fraction. (as they appear, ignores implied 0)
+- E = exp - bias
+- m: significand. first determine normalized/denormalized. normalized 1+fraction. denormalized 0+fraction
+- m x 2^E.
+- 32 patterns: 1 11 ^11 -> 3/4 * 
+- bias: 2^k-1 -1 = 1 where k= # of exponent bits
+- when exponent is 0, denormalize
