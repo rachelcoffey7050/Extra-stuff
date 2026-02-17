@@ -521,3 +521,68 @@ Can use it inside of vscode (so not in this class).
 you know enough to write the model, data access, and much of the service classes.
 Start on the back end.
 Best way to code is to write everything for one function, like login, but we haven't learned enough. After Tuesday, do that. 
+
+## Feb 17
+
+request goes to the handler which handles it by interpreting what it wants
+
+### Javalin
+open-source framework (provides structure to server)
+```
+import io.javalin.Javalin;
+Javalin.create()
+.get("endpoint-name", handler call)
+.start(8080 (port))
+```
+Handler:
+```
+handleHello(Contxt ctx) {
+ctx.result("Hello BYU!");
+}
+```
+The javalin object recieves every request and forwards it to the appropriate handler. It will feel like making multiple listeners.
+You can put all the handlers in the server class, or you can make a class for each handler. 
+Javalin defines an interface Handler with method handle which takes a context parameter.
+
+Write your server so it takes a port number as a command line argument. Then have a default to use if one is not given.
+To return json:
+```
+context.json()
+```
+
+### Handlers
+
+Endpoints/Routes - are urls with a handler bound to it. They can be more than get: post, delete, etc.
+
+Three places for parameters: url, headers, request body. In chess we put them in to request body as a json string. 
+- named parameters in url
+- wildcard parameters: any request that starts with such-and-such goes to this handler
+
+### Error handling
+Use excpetions or use the return value to indicate whether the function suceeded. 
+- return boolean, int, enumeration to indicate.
+- result classes are designed to be able to return error and error message.
+- javalin lets you handle errors
+```
+app.expection(Exception.class, (e, ctx) -> {
+  handle general exceptions here. will not trigger is more specifc exception mapper found. 
+}
+```
+Don't use this much, but can be useful to have one global excpetion handler to catch anything that gets through.
+A lot of exception classes are built in.
+
+To make the website work: tell javalin the name of the folder that has your web files in it.
+```
+Javalin javalinServer = Javalin.create(
+  config -> config.staticFiles.add("web")
+);
+```
+Mapping errors onto status codes returned is one of the hardest parts.
+### Project
+Javalin depedancy is already added for you.
+Use petshop as template. Ignore the stuff we haven't gotten to yet (like the websocket stuff).
+Define Data access obejcts (DAO) as abstract specs. They will be swapped out for the real thing later.
+
+Put in the time!!!
+
+
