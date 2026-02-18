@@ -585,4 +585,57 @@ Define Data access obejcts (DAO) as abstract specs. They will be swapped out for
 
 Put in the time!!!
 
+## Feb 18
 
+### Writing quality code
+Artistic portion of code. No hard rules.
+- comments for confusing parts. Put a comment on every class and on most public methods.
+- accurate and descriptive names
+- avoid code duplication
+- use constants rather than hard coded numbers
+- maintainability
+- short methods
+Graded on:
+- Naming: named on what it does. Java naming conventions:
+    - packages: lowercase with dots in between.
+    - class names capatilised and camel case. same as interfaces
+    - methods camel no caps
+    - variables camel no caps
+    - constants all caps with underscores.
+- Decomposition: single responsibility principle. no large sections of duplicated code. not overly long
+- Readability: easy to read. line length less than 120 characters.
+    - wrapping: indent to the line that makes sense
+    - separate code into paragraphs
+    - indenting
+    - auto-formatting
+    - spaces in between parameters
+    - extra spaces inside complicated expressions and parenthesis to make is make sense.
+    - if there are a lot of conditions, put them on separate lines.
+    - good use of comments
+    - no dead code: code your problem never calls.
+- Package Structure: organized into well-named packages.
+
+### Unit Testing
+
+For service classes and only service classes write automated tests.
+
+Writing the tests first force you to fully understand the end product before you start writing. You can test the interface portion.
+Software systems are very complex. You want to be able to text each piece before you add it to the whole system.
+Test each class induvidually. AI is good at writing unit tests. 
+
+Integration tests test integrated units - classes working together. Systems testing tests software from the outside, the whole system as a user would use it.
+Automated testing is better for these.
+Want a greater volume of unit tests, less integrations tests, least end-to-end tests.
+
+Regression testing: run all tests you have written to make sure new code doesn't break the old code. 
+
+Test Driver - framework called junit that makes it easy to make a test driver that runs all your test cases. Runs them all and creates a report. 
+Think off all the possible ways to fail and all combinations of possibilities.
+Assertions and methods: assertTrue, assertEquals, assertFalse.
+Add junit library to your project, if not already added. Import its classes. Write a Java classes. Before each test method write `@Test`.
+
+There is a lot of duplicated code in test set up - objects most test cases need. Write a method and tag it @BeforeAll 
+@AfterAll - server.stop(); 
+Before/After each runs in between each test.
+
+Use the standard API tests to test phase 3. Do design work before you write the tests - define methods and understand what they will return.
