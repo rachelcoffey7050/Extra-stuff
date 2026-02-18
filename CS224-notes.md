@@ -430,3 +430,40 @@ There are a lot of real and even rational numbers that we can't represent. There
 - 32 patterns: 1 11 ^11 -> 3/4 * 
 - bias: 2^k-1 -1 = 1 where k= # of exponent bits
 - when exponent is 0, denormalize
+
+# Unit 2 Assembly
+## Feb 18 - instructions and electricity
+
+Assembly language foundation (we will learn the language starting Friday) A subset of the language.
+
+### Our abstraction
+computer = memory + processing 
+1. Memory: 0/1 storage of information
+2. Processing (CPU): process information
+
+Why Binary?
+- T/F
+- mechanical - holes, dots, punch cards
+- electronically - electrical charge, current flow, magnetic field.
+- boolean algebra - math with true/false. Fundamental operations - NOT, AND, OR.
+- early computers were made of mechanical switches - on/off. Bug comes from bug that got squished in machine.
+Next came vaccuum tubes which were expensize to construct and fragile but faster.
+Computation really took off when they started using transistors - switches controlled by electricity. Can switch 10,000 times per second. Small and cheap.
+Today we have transistors smaller than 3 nanometers with millions of switches per second. Problems: heat, quantum effects.
+
+Gate - not and nand. 
+inverter - positive voltage turns off bubble and on the other. negative (0) charge - turns on upper, off lower. So 1 in 0 out and 0 in 1 out.
+- replace with symbol ->o- to indicate inversion
+nand - (not and) two transistors in parallel in power and two in series going to ground. !(a^b).
+- if you want and gate, put nand through inverter.
+Put bubbles to flip.
+
+Once you have these transistors, you can put them together to make complex logic
+Then, to compare larger numbers, compare them bitwise. in a chain.
+XOR is building block of addition - the carry (Cout) doesn't go into the sum. Ripple adder is the slowest type of adder but the easiest to understand.
+each level of abstraction hides behavior. 
+
+ALU - arithmetic logic unit can do logical and arithmetic operations. Adding, subtracting, anding, oring, noting.
+- multiplication and division take more time.
+
+
