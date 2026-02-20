@@ -466,4 +466,49 @@ each level of abstraction hides behavior.
 ALU - arithmetic logic unit can do logical and arithmetic operations. Adding, subtracting, anding, oring, noting.
 - multiplication and division take more time.
 
+## Feb 20
+
+Storage - registers and memory are built different. 
+Memory is very slow and needs constant refresh. 
+Registers are fast, for temporary calculations. Use scratch space as much as possible since it is fast.
+
+When we talk about the speed of a CPU, we are talking about a clock occilating between 0 and 3 volts at fixed frequency.
+Rising edge is when it goes up to 3 volts, falling edge is when it goes back to 0.
+Storage happens on rising edge of clock. 
+hyperthreading refers to working on both the rising and falling edge.
+Sum: register is fast, it stores on rising edge.
+
+CPU: a bunch of registers in an array. Called the register file. 
+Has an interface with one way to write to it: destination (place in array), value. valw, dstw.
+Read ports have source and value: scrA, valA, and B. There are multiple ports. 
+
+A simple computer: 
+- ALU - the portion that does calculations
+- register file: stores intermediate values.
+- instruction: the values in the bits.
+In the example instruction, the first two bits control what comes out of ALU.
+2 & 3 select from register file (index out of r). In this architecture, this is only one thing.
+4 & 5 index into r (what to write).
+6 chose between immediate value (from bits) or value from ALU.
+Rest of bits are input/cloud/compressed into 8-bit line.
+So if we wanted to add 2+1 the first bits would be: 00 00 00 1 0000 0010.
+Interpretation of bits: don't need RLU, don't need to read, write to RO, taking bits from bit line, number 2.
+Or (Immediate to register) ir mov $2, R0.
+Second set of bits: 01 00 00 0 0000 0001
+Or value 1, get it from the ALU, store in R0, read R0, take path 01 in ALU. ir add $1, R0
+
+Architecture: the structure of machine. Instructions: programmer model. Together: ISA, instruction set architecture.
+The clock fires, loading in the new instruction, which runs and when electrical signal runs down, it fires again.
+Different machines have different architectures. 
+The clock is like a set of boat locks, timed so the boats (or instructions) don't overtake each other.
+
+Real computers are far more complicated, with more Processors and multiple ALUs in each processor. 
+This is also a single cycle architecture, where each instruction completes in single cycle. 
+Real computers are completing multiple instructions on each clock cycle, as many as they can. Far more chaotic.
+
+### Assembly code
+Things with dots `.pos`
+things with colons:
+evertyhing else is literal instruction.
+Flags come from the ALU and help you resolve relational operators.
 
