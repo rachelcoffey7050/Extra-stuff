@@ -512,3 +512,44 @@ things with colons:
 evertyhing else is literal instruction.
 Flags come from the ALU and help you resolve relational operators.
 
+## Feb 23
+pg 357 - figure 4.2 has a summary of the different instructions. Get them in your head so you can make things out of them.
+basically, you have instructions to move data, arithmetic expressions, subroutines, push/pop, less than, etc.
+
+Goal for today: understand the translation process. 
+
+In the simulator: source code/instruction, representation of objects, memory increasing accross and down. register: rep the hex/scratch area. 
+Page 180 talks about how registers are assigned. rax is where we put the return value. if we all understand/follow the rules then they behave as expected.
+start at address 0: `.pos 0`
+initilize the stach pointer: `irmovq stack, %rsp` q means quad word which is 8 bytes. % is how we refer to registers.
+lower down, tell it where stack starts: `.pos 0x200 \n stack:`
+execute main program `call main`.
+terminate program `halt`.
+
+main function: first always goes into rdi. By convention, retrun value is in rax. a long rdi = 5 amd long rax = sumTo Long(rdi)
+```
+main:
+    irmovq $5, %rdi
+    call sumToLong
+    ret
+```
+Assemble from time to time to check for typos.
+Actual code to write: 
+operation on a quad word - long rax=0; initializes it to 0 faster than just setting it to 0. It works rB = rB op rA. Operand has a dual role.
+Load up value 1 in any register you want.
+create loop with head do. with go to operation, we ca go to every point in memory.
+remove old value first, then jump to do, a conditaional jump based on being greaer than or not.
+```
+sumToLong:
+    xorq %rax %rax
+    irmovq &1, %rsi
+    do:
+        addq %rdi, %rax
+        subq %rsi, %rdi
+        rrmoveq %rdi, %rdx
+        jg do
+ret
+```
+flags include overflow, ? Static flags help you make a decision of what next
+Don't put this in an infinite loop.
+Whenever you make a call, you push the info on the runntime stack.
