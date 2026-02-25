@@ -553,3 +553,42 @@ ret
 flags include overflow, ? Static flags help you make a decision of what next
 Don't put this in an infinite loop.
 Whenever you make a call, you push the info on the runntime stack.
+
+## Feb 25 - Assembly example
+```
+main:
+    pushq %r12
+    irmovq $42, %r12
+    irmovq $5,%rdi
+    call square        # sum(array, 4) #keeps the value of where you
+                       #called it so you know where to return
+    popq %rdi
+    ret
+
+square:                     #long square(long rdi)
+    rrmovq %rdi, %rax       #long rax = rdi
+    irmovq $1, %rsi         #long rsi = 1;
+    pushq %r12              #callee save register - if you want to use, 
+                            #save and restore it so the original value 
+                            #in r12 doesn't change
+while:                      
+    rrmovq %rsi, %r12       #if (rsi >= rdi) go to end
+    subq %rdi, %r12         # subtract so one is negative/0
+    jge end                 # greater or equal than
+    
+    addq %rdi, %rax         #rax = rax +rdi
+    irmovq $1, %r12          #rsi = rsi +1
+    addq %r12, %rsi 
+    jmp while               # }
+end:            
+    popq %r12               #restore callee save register
+    ret                     # return rax
+                            # }
+```
+Iterative process - first make it so it only does things you know can be done in assembly.
+- rename - first variable: rdi. second: rsi. return value: rax.
+- change operations- rax = rax + *rdi; rdi = rdi+1 instead of rdi++;
+- scale - one needs to scale to eight because its a long
+- everything needs to have a register, including 1, so create a register for 1. long r12=0; then do something to make it one
+- remember callee save
+- then change while to if () goto end and add end tag
