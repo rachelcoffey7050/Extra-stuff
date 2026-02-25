@@ -639,3 +639,85 @@ There is a lot of duplicated code in test set up - objects most test cases need.
 Before/After each runs in between each test.
 
 Use the standard API tests to test phase 3. Do design work before you write the tests - define methods and understand what they will return.
+
+# Databases
+## Feb 25 - relational databases part one: the relational model
+Databases: build systems that work all the time.
+
+### Relational Databases overview
+relational: there are links in some tables that point to other tables. Based on relational theory, found on 236 principles.
+We have tables in a database, each of which stores a different type of objects. We use SQL to retrieve data.
+A dominant technology for many years because of usefulness.
+
+Other types of databases - non-sql databases such as mongoDB.
+
+Commonly used: mySQL is what we will use.
+
+**Writing programs that use a database:** Programs can access through APIs (collection of functions and classes). 
+You also need a database driver which is a libaray you need to import into your project. That is programmatic access.
+Interactive Database access is a graphical application that allows you to access the database without programming.
+Interactive Database access is a good way to figure out why things aren't working/debug.
+
+Embedded databases - where an app stores its data with local file access. 
+Client/server database - more common method where network calls server which accesses database with local file access. 
+This allows for a multi-user application. The database is hosted on the server.
+
+### The relational model
+object - class, object, relationship. Relational - table, row, relationship primary and foriegn keys. 
+
+In addition to tables with primary and foriegn keys, there are trees. A tree has a foriegn key column which points into the same table.
+
+Types of relationships
+- one to one: create two tables which are connected with foriegn keys in one or both. SRP - split tables so they don't become unwieldy
+- one to many: foriegn key only added to the many column
+- many to many: create an extra table with two foriegn keys - records the connections.
+
+### Modeling a database schema
+Entity Relationship Diagrams (crosses, circles, and crows feet) or UML diagram (numbers)
+
+## Relational Databases Part 2: SQL
+
+### Structured Query Language SQL
+Not really a programming language, more of a database manipulation language. It's a big language that has a small useful subset.
+
+**data definition language (DDL)** - create, delete, alter tables
+
+**manipulation language (DML)** - insert, update, delete rows
+
+**Query language (DQL)** - select
+
+### data types
+Every column is given a constraining data type.
+- CHARACTER(n) - fixed size
+- CHARACTER VARYING/VARCHAR(n)
+- INT, SMALLINT
+- FLOAT, REAL, DOUBLE PRECISION
+- NUMERIC, DECIMAL(precision, scale) (more precise than floats)
+- BLOB - binary large object (images, sound, etc)
+- CLOB - character large object (text file)
+- BIT array
+- DATE, TIME, TIMESTAMP is combination, TIMESTAMPTZ has time zone.
+
+### creating and dropping tables
+definition language
+
+Creating tables:
+If a row is required, put not null, else null. auto-increment fills in a plus-one value that only works on ints.
+```sql
+CREATE TABLE title
+(
+  id integer not null primary key auto-increment,
+  foriegn key(genre) references genre(genre),
+);
+```
+Drop:
+```
+drop table book;
+drop table if exists book;
+```
+
+### Inserting, manipulating, deleting rows
+Data manipulation language.
+
+insert: `insert into book (title, author, genre, cat_id) values ('Harry Potter','JKR','Childrens fantasy','2')`
+update: `UPDATE member  SET name = 'Chris', WHERE id=3` if you forget the WHERE clause it will change every row.
