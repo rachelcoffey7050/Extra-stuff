@@ -592,3 +592,11 @@ Iterative process - first make it so it only does things you know can be done in
 - everything needs to have a register, including 1, so create a register for 1. long r12=0; then do something to make it one
 - remember callee save
 - then change while to if () goto end and add end tag
+
+## Feb 26 lab notes
+variables below functions.
+flags - anytime you do an operation, it sets the flags. OF only applies to add/subtract when the sign is impossible.
+Put a newline at the end of your assembly code
+normally registers store value, but if you move it, it stores the location of the memory.
+$ is decimal, if you want hex you can use 0x.
+executes as it steps off in the simulator.
