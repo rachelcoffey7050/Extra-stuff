@@ -600,3 +600,41 @@ Put a newline at the end of your assembly code
 normally registers store value, but if you move it, it stores the location of the memory.
 $ is decimal, if you want hex you can use 0x.
 executes as it steps off in the simulator.
+
+## Feb 27 recursive function
+Beginning thoughts:
+- xorq rax rax will turn it to 0
+- become comfortable with mrmovq - D(rA) where D is the offset (constant)
+- D(rb, i, s) - how to index into an array: D + R[rb] + i * s
+
+```
+mrmovq (array)(rdi)             #long recursive sum(long *array, long length)
+irmovq length (rsi)
+function:
+irmovq $0, rax #sum
+andq rsi rsi
+addq 1 rdi
+subq 1 rsi
+jne function    #if length == 0 - return sum
+    sum = recursive_sum(array+1, length -1)
+    sum += array;
+return sum
+```
+His solution:
+```
+sum:
+    irmovq $0, %rax
+    andq %rsi, %rsi
+    je end
+    pushq %rdi  #save value of rdi for recursive call, then put it back
+    irmovq $8, %rdx
+    addq %rdx, %rdi
+    irmovq $1, %rdx
+    subq %rdi, %rsi
+    call sum
+    popq %rdi
+    mrmovq 0(%rdi), %rdx
+    addq %rdx, %rax
+end:
+    ret
+```
