@@ -638,3 +638,46 @@ sum:
 end:
     ret
 ```
+### March 2
+registers - last week it didn't matter which register you chose. Soon, it will matter that you callee save (pushq and popq)
+
+How do all these methods work?
+
+### exercises - instruction encoding
+instructions:
+- halt: 0 0
+- nop: 1 0
+- rrmovq: 2 0 rA rB
+- irmovq: 3 0 F rB 8-byte value
+- rmmovq: 4 0 rA D(rB) D...
+- mrmovq: 5 0 D(rB), rA D...
+- Opq rA, rB
+- etc
+
+Practice: low order byte comes first.
+
+exersise 1:
+- line 1: 30 F3 0F 00 00 00 00 00 00 00
+- line 2: 20 31
+- line 3: 40 13 FD FF FF FF FF FF FF FF
+- line 4: 60 31
+- line 5: 70 0C 01 00 00 00 00 00 00 00
+ie 12 bytes away from start - 0x100 + 12
+
+excersize 2: 3=rbx
+A) irmovq -4, %rbx rrmmovq %rsi 2^15(%rbx)
+B) pushq %rsi call 0x020< halt irmovq $10, %rbx
+C) mrmovq (%5) %4
+D) OPq 
+
+Why this matters:
+### hardware elements that implement the instructions
+These bits steer where data goes.
+State is set according to instruction on leading clock edge, result is returned on low period.
+State holding device: intruction memory, data memory, program counter (address of instruction we are doing), etc.
+stages:
+- fetch
+- decode
+- execute, configure the ALU according to IFUN(?) and returns valE.
+- memory
+- PC update
