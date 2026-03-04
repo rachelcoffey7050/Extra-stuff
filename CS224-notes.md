@@ -681,3 +681,32 @@ stages:
 - execute, configure the ALU according to IFUN(?) and returns valE.
 - memory
 - PC update
+
+## March 4
+Project 3: implement simulator for all this in c
+
+hardware structure: instruction memory, bubbles that need to be set for the next stage in memory.
+condition codes are needed to know if you are taking the valP from bubble or valC that was computed.
+pg 387 tables. Read so you know what is going on. 
+We are pretending to be the wires. 4 wires connected to each of the first two nibbles.
+The diagram is important because it tells you where to fine things.
+The steps are just deciding the value of each bubbles as you move through the diagram.
+The F tells the ALU to add 0.
+**Fetch**
+subscript tells you how many bytes you are getting from memory. The two rA:rB are the two nibbles. 
+fro irmovq valC is also updated with 8 bytes
+**Decode**
+valA <- R[rA]
+**Execute**
+Set valE to be that computation where OP is ifun (rB)
+**Memory**
+nothing to do for OPq
+**write back**
+R[rB] <- valE
+**PC update**
+
+Work on understanding the table. Write a function for each stage. 
+
+### Pipelining
+Execution in stanges like a Ford factory. break up the stages and put a register between the stages. 
+Each instruction takes 5 clock cycles but you can make the cycles shorter. but once you the first one gets through, you can have instructions finishing fast. 
