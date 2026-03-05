@@ -719,5 +719,31 @@ drop table if exists book;
 ### Inserting, manipulating, deleting rows
 Data manipulation language.
 
-insert: `insert into book (title, author, genre, cat_id) values ('Harry Potter','JKR','Childrens fantasy','2')`
+insert: `insert into book (title, author, genre, cat_id) values ('Harry Potter','JKR','Children's fantasy','2')`
 update: `UPDATE member  SET name = 'Chris', WHERE id=3` if you forget the WHERE clause it will change every row.
+
+## March 4
+phase 4 is adding mySQL support to your DAO and write a couple of tests. 
+Database manager - given class that is helpful for handling connections to the database. 
+Server needs to connect to DB first thing and check if it is active and that all the tables exist. If not, create. Pet shop shows how.
+Need user, connection url, etc. 
+Static initilizer class - reads a file called db.properties. key-value pairs with host, port, username, password, etc. You'll need to make one of these in resouces but don't commit it to git - git-ignore.
+Create DB: copy-and paste some of this code. DB name will be chess, not pet shop.
+
+### Hash passwords: 
+one column in a table is a user's password. We do not want to store these in plain text. Converts the string into an obuscated form. 
+Simple - use bcrypt library. implements password hashing algorithm.
+
+you will need to write some code that will take a chess game and store it as a string.
+
+### mySQL
+prereq: installing a database.
+
+popular relational database. Free. Open source. download community edition. LTS version is long term support. 
+What you have installed is a database server, waiting for requests. Runs in the background as a service. 
+
+mySQL workbench is a visual interface of the database.
+
+Don't make all your code in the root user because you could ruin your database.
+
+### last time's review 
