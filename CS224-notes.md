@@ -710,3 +710,61 @@ Work on understanding the table. Write a function for each stage.
 ### Pipelining
 Execution in stanges like a Ford factory. break up the stages and put a register between the stages. 
 Each instruction takes 5 clock cycles but you can make the cycles shorter. but once you the first one gets through, you can have instructions finishing fast. 
+
+## March 6
+see tables on 180-181 in the textbook.
+
+Addressing - different ways I can compute the address
+
+### Callee save
+Get serious to argument passing. rdi is always the first argument, rsi is second, then rdx, rcx. 
+If you have a method with more than four parameters, you push the rest onto the stack in reverse order. Find them as offsets to the stack pointer. You do that as: mrmovq 8(%rsp). You don't do this for all because it's slow.
+They are set aside for us. They are caller saved, meaning if they wanted the thing saved they should have saved it before they called
+
+1. push onto the stack. 2. work with it 3. pop off the stack in reverse order.
+```
+sum:
+pushq %rbx
+pushq %r12
+irmovq $1, rbx
+subq &rdi, %rbx
+irmovq $1, %rax
+je end
+
+rrmovq %rdi, %r12
+irmovq $1, %rbx
+sub %rbx, %rdi
+call sum
+addq %r12, %rax
+
+end:
+popq %r12
+popq %rbx
+ret
+```
+In this recursive method, it is pushing and poping the value every time.
+
+### Caller save
+Instead, use rsi which does not need to be pushed because it is caller saved. You do still need to save rdi for the recursive call.
+```
+sum:
+
+irmovq $1, rsi
+subq &rdi, %rsi
+irmovq $1, %rax
+je end
+
+pushq %rdi
+irmovq $1, %rbx
+sub %rsi, %rdi
+call sum
+popq %rdi
+addq %r12, %rax
+
+end:
+ret
+```
+We have a shared understanding of the rules, which allows code to work in all libraries, compiliers, etc.
+We all agree on the roles of different registers.
+### Addressing modes
+Hardest part of next project.
