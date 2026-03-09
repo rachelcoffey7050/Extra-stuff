@@ -746,4 +746,55 @@ mySQL workbench is a visual interface of the database.
 
 Don't make all your code in the root user because you could ruin your database.
 
-### last time's review 
+## March 9 - software development practices
+
+### logging
+The logs tell you where the vulnerability came up. We need visibility of what happens so we have the code take a record of everything interesting that happens.
+In cloud programming, logs may be the only way to debug. 
+Simple idea with great payoff.
+
+Structure of a log file: Messsages have a date and time. Entering/intro message. Informational, debugging, error, exception messages. 
+
+Java has logging built in (if a language doesn't, it will have a library
+```
+Logger logger = Logger.getLogger(LoggingExample.class.getName());
+FileHandler fileHandler = new FileHandler("example.log", true);
+logger.addHandler(fileHandler);
+// Where should log go? Handler here sends it to a file.
+```
+
+Log levels - SEVERE, WARNING, INFO, FINE, FINEST (detail) - `logger.setLevel(Level.INFO)` will only show you messages INFO or higher.
+
+### defensive programming
+Like defensive driving - assume everyone will make mistakes and prepare for them. Catch bugs quickly, like with unit testing.
+
+**Assert statements** built into your language, instead of j-unit. Mental models are important - your assumptions about the code. 
+Put your assumptions in the code so that you know if you are correct. Typically only done during develpment. 
+Helpful that is crashes whenever you make a mistake.
+assert boolean expression. You have to run it with the flag to turn them on. 
+Consider using them whenever a function gets called and you are making assumption.
+Different from unit tests - doesn't test what your function does, but test the internal state of your variables. 
+
+**Parameter checking**
+When writing a function that accepts inputs, you should check the inputs before preceeding. 
+Two ways to check: assertions or if statements that throw exceptions.
+
+### debugging
+
+You need to understand the structure to properly debug. It is also helpful to know the language well and how computers work. 
+1. You need a reproduceable test case (the bug happens on demand)
+2. make that test case as simple as possible with small set of inputs. Pass-of tests aren't the best for this.
+3. then use the test to see what happens.
+  - use print statements to figure out where it's going wrong
+  - take a break to come back with a fresh mind - solving a bug at a higher level of abstractio hwen you are not staring at the code
+  - have someone else help or ask AI
+  - read the code
+  - step through using IDE debugger 
+Don't just start changing things before you know what the issue is. 
+
+Different types of break points:
+- conditional break point: only stops under certain circumstances. like i=100
+- suspended break points: logs instead of stops
+- remove once hit
+- only break if certain class calls it.
+- see pass count
