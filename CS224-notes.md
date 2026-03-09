@@ -766,5 +766,64 @@ ret
 ```
 We have a shared understanding of the rules, which allows code to work in all libraries, compiliers, etc.
 We all agree on the roles of different registers.
+
+## March 9
+
+Allocate space in the runtime stack and put the array there.
+```
+main:
+    pushq %rbp
+    rrmovq %rsp, %rbp # move stack pointer into the base pointer
+    # long array[] = {1,2,3,4,5,0};
+    irmovq $48, %rax
+    subq %rax, %rsp # so that there will be space (48) to fill in memory, bottmon up
+    irmovq $1, %rax
+    rmmovq %rax, -48(%rbp)
+    irmovq $2, %rax
+    rmmovq %rax, -40(%rbp) 
+    irmovq $3, %rax
+    rmmovq %rax, -32(%rbp) 
+    irmovq $4, %rax
+    rmmovq %rax, -24(%rbp)
+    irmovq $5, %rax
+    rmmovq %rax, -16(%rbp) 
+    irmovq $0, %rax
+    rmmovq %rax, -8(%rbp)
+    irmovq $48, %rax
+    rrmovq %rbp, %rdi
+    subq %rax, %rdi
+    call array_length
+    #tear down the array
+    rrmovq %rbp, %rsp
+    popq %rbp
+    ret
+
+array_length:
+    pushq %rbp
+    rrmovq %rsp, %rsp
+    mormovq 0(%rdi),%rax # if array==0
+    andq %rax, %rax
+    irmovq $1, %rax
+    je end #return 1
+
+    irmovq $8, %rsi
+    addq %rsi, %rdi
+    call array_length
+    irmovq $1, %rsi
+    addq %rdi, %rax
+
+end:
+    rrmovq %rbp, %rsp
+    popq %rbp
+    ret
+
+```
+This code shows how addresses are pushed on the runtime stack and the continuation.
+The base pointer is a fixed point in the frame to point to the local variables.
+Take out the stack protection with `-fno-stack-protector` whichs takes out the random canary value (which protects against buffer overflow attacks).
+
 ### Addressing modes
-Hardest part of next project.
+leaq - quad word - 4x2=8bytes. D(rb, ri, s) - base address, index, scaling factor (2,4,8,1). Computes D + R[rb] + R[ri]*s
+leave is the epilouge - replaces movq, popq
+
+
