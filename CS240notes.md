@@ -798,3 +798,50 @@ Different types of break points:
 - remove once hit
 - only break if certain class calls it.
 - see pass count
+
+## March 11 - Phase 5
+
+Working on the client side. Read, eval, print loops. They enter the input, we execute the command, and output the command.
+- preloggin repl (login, register, help, quit)
+- postloggin repl (create, list, join, observe, help, logout)
+- play repl (redraw, make move, highlight legal moves, resign, help, leave) - don't implement except leave game in phase 5
+Draw the board will be the final step of phase 5.
+
+Need to learn:
+- input maybe
+- call webAPIs
+- draw the board
+
+We are making a fake server:
+```
+class ServerFacade{
+  RegisterResult register(RegisterRequest request);
+  JoinGameResult joinGame(JoinGameRequest request);
+}
+```
+
+doGet - build url, 
+Make request with timeout. here it's set to 5000 seconds. It will have a `.GET()` and `.build();`
+If status code is 200, else excetions.
+What about post request? similar to get but with `.POST` you need to provide a request body. 
+Put that code into server facade. 
+
+You can also look at Petshop. It creates a client.
+Variatic function - creates params array that accepts any number of parameters.
+
+write tests - technically integration tests but similar to unit tests.
+
+### Drawing the board - Console UI
+
+There was a time before graphical user interfaces (that use mouse) where console user interfaces are built from the terminal.
+This class used to build a web app, but that was too much. we do that in 260. 
+It is possible to create a fairly nice ocnsole user interface with formatted and colored text and character-based graphics.
+Terminal is a 2D grid where every cell has a coordinate. Prints from the cursor.
+
+**Terminal Control codes:** provided in the starter code for ease of use. Set background color and text color. 
+You can make the board look however you want.
+
+For your pieces, you can use alphabetic characters, which can be any color.
+Or you can use the chess piece unicode characters. They have different widths that the alphabetic characters, so it might be difficult getting them lined up
+You can use different size of spaces to get them lined up `\u2003` and `\u2001`
+
