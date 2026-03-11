@@ -826,4 +826,32 @@ Take out the stack protection with `-fno-stack-protector` whichs takes out the r
 leaq - quad word - 4x2=8bytes. D(rb, ri, s) - base address, index, scaling factor (2,4,8,1). Computes D + R[rb] + R[ri]*s
 leave is the epilouge - replaces movq, popq
 
+## March 11
 
+### Midterm tips
+Conversion - first turn it into code that looks a little like assembly, then make it assembly. Find steps under Feb 24 assembly example.
+
+Call - lets look at the encoding/raw bytes. First is icode:ifun, then comes the address you are going to. It stores the new address (going to) in the PC
+then the stack pointer moves up, storing the address to return to where it was in the memory.
+When the return happens, the PC changes back and the stack pointer will also change back (go back down)
+
+Want to have on hand pages 351, 387.
+
+### finish the problem from last time
+
+Prologue and epilogue are consistent between different applications.
+prologue - set up stack frame.
+array-length - 
+epilogue - tear down the stack frame and return.
+Subtract from the stack pointer to allocate. Add to deallocate.
+
+Memory layout:
+Heap goes down, Stack goes up. if you allocate too much on the heap it will go into the stack, and vice versa. 
+No exec.
+
+Differnce between example from last time and compiler:
+- in y86-64, everthing is relative to the stack pointer. Least address is at the bottom so we add to go up by 8 after the initial subtraction by 48. Esentially the prologue. the essential epilogue is adding 48.
+- in x, we use a constant offset to the base pointer rbp. Save its value and make a new value: the return address. So return address is first on the stack, then old rbp. Then we move stack pointer to make room for local variables. Instructions are different. You can include an immediete in operations like subq as well as movq. leaq = load effective address. D(rb, ri, s) - D + R[rb] + R[ri]*s.
+So X is much easier to write assumbly code in, but much more complicated to build.
+
+**Leaq** is very important. load effective address. D(rb, ri, s) - D + R[rb] + R[ri]*s.
