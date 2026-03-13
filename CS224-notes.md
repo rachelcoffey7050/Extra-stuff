@@ -855,3 +855,18 @@ Differnce between example from last time and compiler:
 So X is much easier to write assumbly code in, but much more complicated to build.
 
 **Leaq** is very important. load effective address. D(rb, ri, s) - D + R[rb] + R[ri]*s.
+
+## March 13
+page 180
+cmpq = compare. subtract %rA, %rB without saving to rB.
+testq = andq rax rax.
+jnb = jump not below. Unsigned greater than.
+.method = something that helps it turn into raw binary.
+eax is the bottom 4 bytes of the rax register. same thing with esi, etc.
+
+The program will compare the two numbers on the outside, move inward if they are equal, return once it meets at the middle. Checks if its a palindrome
+There will be noise that will do nothing - ignore it.
+Turn into c code - jumps into returns, draw arrays, etc.
+
+Efficiency - the compiler will make it without a call, knowing what it will return and/or make a recursive function iterativly.
+
