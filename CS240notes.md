@@ -845,3 +845,37 @@ For your pieces, you can use alphabetic characters, which can be any color.
 Or you can use the chess piece unicode characters. They have different widths that the alphabetic characters, so it might be difficult getting them lined up
 You can use different size of spaces to get them lined up `\u2003` and `\u2001`
 
+# Security
+## March 16
+
+Computer Security: hackers compromise systems
+- gain unauthorized access to data
+- gain access to computers
+- disable a system
+Vast subject. Learn as much as possible.
+
+Security Goals
+- confidentiality
+- authentication
+- data integrity
+- non-repudiation (verifying origin of data - not erase trails)
+
+### cryptographic has functions
+Different the what you learned in 235. 
+Give a fingerprint for the data that summarizes. Pretty gaurenteed to be unique. 
+512/256 bit digest. SHA-256 is the most common. 512 is even more sucure, which is uneccessary right now.
+
+Application - passwords, bitcoin, digital signatures. 
+
+Passwords - the hash itself will be the same for the same password. You can create a dictionary of passwords to hash codes, so you can lookup people's password.
+So, you need to add salt to the password. append a random string to the password. Then, hash the combination. 
+Store both the salt and the hash in the database.
+We want to use a hashing algorithm that is slow and inefficient so that hackers have to take more take to find passwords.
+When you hash a password with bcrypt, it does the salt step for you.
+
+### Data encryption
+Hash is one way. Encryption is two way, if you have the key, so you can get the data back. 
+keep the key private. 1024 and 2048 are typical key sizes nowadays.
+Historically used DES but now use AES.
+
+For AES, you need a key and a initialization Vector. 
