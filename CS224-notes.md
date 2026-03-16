@@ -870,3 +870,23 @@ Turn into c code - jumps into returns, draw arrays, etc.
 
 Efficiency - the compiler will make it without a call, knowing what it will return and/or make a recursive function iterativly.
 
+## March 16
+Problem like there will be on the final. 
+**Multi-dimensional arrays.** they are stored in row-major order.
+Page 181 - one table to rule them all. Addressing modes.
+
+matrix is stored row by row. So if you want to get [i][j] you need i*col + j
+So you can find m, n because sometime during the computation you multiply i/j by col/rows
+
+Figure out m and n. rdi = i, rsi = j
+```
+rdx = i * 8. so 8i is loaded.
+rdx = i * 8 - i = 7i
+rdx = rdi * 8 - rdi + rsi = 7i+j
+rax = 4 * rsi + rsi = 5 * rsi = 5j
+rax = 5j + i
+rcx = Q + rip // rip - relative to instruction pointer. Address of Q
+rax = rcx + 8 * rax(5*rsi) // go to Q and scale by 8 bytes because its a long.  m=5 because you had to use 5 next to j to get to correct place.
+rcx = P + rip  //
+rax = rax + rcx + rdx * 8 // rdx for P so col are 7 so n=7
+```
