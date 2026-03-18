@@ -879,3 +879,61 @@ keep the key private. 1024 and 2048 are typical key sizes nowadays.
 Historically used DES but now use AES.
 
 For AES, you need a key and a initialization Vector. 
+
+## March 18
+cryptographic hash functions - one way, useful for passwords
+encryption - two way, encrypted and decrypted with a key. 
+
+### Data encryption continued
+
+Asymmetric or public keys - two different keys with a mathmatical relationship. Generated together (key pair). 
+Give one of the keys, it is infeasible to calulate the other.
+Popular algorithms: RSA, ECC
+This allows secure communication without a secure key.
+Disadvantages: can only encrypt a small amount of data, up to the size of the key. Very slow.
+We get around that by sharing the shared key with the asymmetric keys, and have the rest of the data used normally encryption.
+Used for secure key exchange and digital signature.\
+Very important invention.
+
+Applications
+- protect data as it traverses a computer network (HTTPS),
+- protect data that is stored in a database or file,
+- password managers.
+
+**Secure key exchange**
+key exchange algorithms:
+1. alice sends ppublic key
+2. bob generates random symmetric key
+3. bob encrypts symmetric key using public key
+4. bob sends encrypted symmetric key
+5. alice decrypts using private key
+HTTPS is similar:
+- client sends random number
+- server sends client random number
+- server sends client public key
+- client sends server another random num that is encrypted with server's public key
+- server decrypts using private key
+- client & server use client random, server random, pre-master secrets to generate the same symmetric key (ie AES)
+- client and server exchange data encrypted with generated symmetric key.
+
+**Server authentication:**
+How can client verify indentity of the server?
+certificates: contain public key and identifying information about server/company posted on server. 
+Third party organizations create certificate files so they are trusted. The file is marked by a digital signature.
+Such as: Let's encrypt (free), GoDaddy, DigiCert, Sectigo, etc.
+
+### Digital signatures
+
+creating
+1. signer runs data through hash function to create signer digest
+2. signer encrypts digest using their private key, this is the digital signature
+3. signer sends data + digital signature to reciever.
+
+verifying
+1. data run through hash to create digest
+2. reciever decrypts signature to make signer digest
+3. compare two digests. they should match.
+
+Applications: certificates, crypto currency, anything that needs a verified origin.
+
+
