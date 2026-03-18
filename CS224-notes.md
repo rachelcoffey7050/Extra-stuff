@@ -890,3 +890,32 @@ rax = rcx + 8 * rax(5*rsi) // go to Q and scale by 8 bytes because its a long.  
 rcx = P + rip  //
 rax = rax + rcx + rdx * 8 // rdx for P so col are 7 so n=7
 ```
+
+## March 18
+testq - ands and sets the flags without storing. 
+cmpq - subs and sets the flags without storing.
+leaq computes an address
+
+```
+eax = rdi + 12
+rdi + 8 = eax - copy what is in 12 to 8 place
+rax = rdi + 8 so return value is the thing in the 8 place
+put that value in the starting rdi place
+and then put that value in the 16 place
+```
+
+1. Draw memory
+2. taking out the register junk
+3. look at group of instructions and map to c code.
+
+If you use rax after the call, you are returning a value - whatever is in rax.
+
+```
+memory: v, *p
+eax = 0
+while (rdi != 0) null instead of 0 in this case since it is an address. this is the linked list part.
+    rax += rdi
+    shift rdi by 8 (1 byte) (shift the value at the next memory address into the place the pointer points)
+return
+rdi starts at v, the long and then moves along the linked list
+```
