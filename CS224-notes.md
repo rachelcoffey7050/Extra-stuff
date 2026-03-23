@@ -919,3 +919,21 @@ while (rdi != 0) null instead of 0 in this case since it is an address. this is 
 return
 rdi starts at v, the long and then moves along the linked list
 ```
+
+## March 23 - prep for bomb lab
+scp - secure copy command
+
+Make friends with the debugger.
+
+Just because you can't solve a problem, it's not the end of the world. 
+
+War and Peace - incredible book.
+
+Every time you blow up the bomb, you lose 1 point (ie 99/100). So use the debugger and don't trigger the bomb. 
+Use disassemble to look at the assembly code. Goal is to learn. 
+Refresh makes the window look nice again. 
+Set breakpoint `break *phase_1+28`.
+next/n is step over. s/step is step into. si is step in the assembly. 
+`p /d $rsi` prints the contents of register. If you want the memory contents, use `x /s`.
+Put the phrase for each phase on a new line in the input file.
+Canary in the coal mine - protects against a stack overflow attack.
