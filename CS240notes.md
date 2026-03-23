@@ -936,4 +936,32 @@ verifying
 
 Applications: certificates, crypto currency, anything that needs a verified origin.
 
+## March 23 - websockets and phase 6
+phase 6 is a bit more sofisticated - programs with non-trivial structure (architecture). 
 
+### websocket
+Asynoncronous programming is done with websocket. 
+
+Client-server architecture doesn't fit chess - we need asyncronous communication between clients.
+Email uses this, the server gives you emails when they arrive even if you don't request new emails. 
+You could simulate peer-to-peer messaging with HTTP but it will be inefficient.
+
+First, connection upgrade. Second, ping pong communication that makes sure the connection is open. 
+`ctx.enableAutomaticPings();` 
+
+### phase 6
+Create a websocket handler with all the induvidual handlers for websocket requests. 
+Pet shop is simple, but chess is complicated since you only broadcast the messages within a game.
+Pass in the session that you want to exclude.
+
+**WS facade**
+whent the client gets a message, it prints it out. The facade seds the things that need to be printed to the client. 
+When the facade is created in the client, it is passed the client itself.
+Having this class allows so that your websocket facade can be generalized to notification handlers, instead of just pet client. 
+
+**Chess**
+what kind of messages do there need to be? Connect, load_game, connect2, load_game2, notify join, make move, load game2, loadgame.
+Messgae types: connect, make_move, leave, resign.
+Systems thinking - something that AI can't do so well. It gets confused with a large system.
+Ignore the diagram, go off petshop.
+Make the game work! Once you are done with phase 6 you are done with the class.
