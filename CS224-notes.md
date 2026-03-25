@@ -937,3 +937,19 @@ next/n is step over. s/step is step into. si is step in the assembly.
 `p /d $rsi` prints the contents of register. If you want the memory contents, use `x /s`.
 Put the phrase for each phase on a new line in the input file.
 Canary in the coal mine - protects against a stack overflow attack.
+
+## Basis of a buffer overflow attack
+
+goal: corrupt the continuation in a way that changes behavior of the program. 
+So you understand how people might try to break it. People don't code in defense of that.
+
+example:
+- compile
+- run up to break point - interpret assembly
+- draw memory - storing addresses before call, call, moving pointer past the stored address.
+- create an input string that will fill space until you get there, then put what you want in binary
+- or do it all in hex
+- 0x101010101010101010101010401189
+- ************
+- switch to hex editor and do 12 of gibberish and then the whole address backwards 881140
+- strings are null terminated
