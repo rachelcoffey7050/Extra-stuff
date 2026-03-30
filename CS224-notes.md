@@ -953,3 +953,25 @@ example:
 - ************
 - switch to hex editor and do 12 of gibberish and then the whole address backwards 881140
 - strings are null terminated
+
+## March 30 - attack lab section 2
+### Phase 1
+steps:
+- turn off stack protector with `fno-stack-protector`
+- learn to use gdb
+- DRAW MEMORY - so that you know where the buffer string goes.
+- exploit stream: 00000000000000000000000089114000
+- either use the hex characters, or if there is not one, use the hex editor or hex-to-raw
+- type the string in hex into a file then `../../../target1/hex2raw < exploit.tst > exploit
+
+### Phase 2
+Instead, change it to go to your code. 
+Again, find the right place to put it. Then, find the buffer that will send you to your code. 
+Then write exploit.s in assembly - moves a return address onto the stack and return.
+In the lab, you need to call it will a parameter in rdi.
+```
+movq $0x401189, %rax
+pushq %rax
+ret
+```
+Compile, disassemble and put it into exploit string.
