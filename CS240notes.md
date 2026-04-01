@@ -965,3 +965,35 @@ Messgae types: connect, make_move, leave, resign.
 Systems thinking - something that AI can't do so well. It gets confused with a large system.
 Ignore the diagram, go off petshop.
 Make the game work! Once you are done with phase 6 you are done with the class.
+
+## March 30 - Concurrency
+How computers actually work, not what you've been taught. 
+Your computer is running hundreds of programs at once. 
+
+In a program, there can be multiple threads which do things in the background. Anything that takes a long time should happen on a different thread.
+All these threads are sharing the same address space. If two threads try to modify the same data sctructure, it creates problems.
+A core is somehting that can run a thread. If you have 8 cores, you can run 8 threads. 
+But we need a lot more than that. Each program has many threads. 
+
+When you start a thread, it shuts down the main program. It lets the threads run miliseconds at a time. It will be different each time. 
+The cores let each thread take turn, switching them out so fast it appears that they're happening at the same time. This is called concurrent. 
+
+### Thread
+Javalin creates a new thread to process each incoming request so if people all request at once, that is what happens. 
+
+You can create an executer service that will run threads. It will put them in the queue and then when one finishes put it in the thread poll to run. 
+Java has nice threading worked into it. 
+
+### Race conditions - what can go wrong
+A shared resouce - also called a critical resource is fought over. If you get there first you get the chair. 
+Two threads using the same resource will depend on who gets there first. Everyone has to take turns.
+This could change the outcome depending on what happens first. Could result in leakage.
+
+Database example - register at the same time with the same username. Throws a database exception.
+
+### How to write thread-safe code
+
+1. Database transations: bundle the things into one action, so a request to join can't happen at the exact same time.
+2. Synchronized methods: mark it as a critical resource to tell it to take turns with word `synchronized`. Could add this to websocket methods in Chess. (not the way pet shop does it)
+3. Synchronized code blocks:
+
