@@ -975,3 +975,26 @@ pushq %rax
 ret
 ```
 Compile, disassemble and put it into exploit string.
+
+## April 1
+NO CLASS FRIDAY!! :) - hope this isn't an April fool's joke
+don't just pushq $0x because it only works for 4-byte values, so you can't push 8-byte values. So mov it into rax and then push rax
+When you leave the flags of (stack protection) some of the stack is not available to be executed. 
+
+### return oriented program
+Instead of using your own code from the input string, you use the code that is already in the program.
+Look for any snippits of code that end with return. Stack up returns and useful instructions.
+
+example: get deadbeef into rdi without using runtime stack. 
+Use gadgets - useful instruction followed by a return. 
+Essential idea
+```
+12 random bytes
+0x401195 popq %rax
+0xdeadbeef
+0x401191 mov %rax, %rdi
+0x401171 attack 1
+```
+`2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 95 11 40 00 00 00 00 ef be ad de 00 00 00 00 91 11 40 00 00 00 00 71 11 40 00 00 00 00`
+
+stack return address with data to get it to do what you want.
