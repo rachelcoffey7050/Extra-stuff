@@ -966,7 +966,7 @@ Systems thinking - something that AI can't do so well. It gets confused with a l
 Ignore the diagram, go off petshop.
 Make the game work! Once you are done with phase 6 you are done with the class.
 
-## March 30 - Concurrency
+## March 30 and April 6 - Concurrency
 How computers actually work, not what you've been taught. 
 Your computer is running hundreds of programs at once. 
 
@@ -994,6 +994,32 @@ Database example - register at the same time with the same username. Throws a da
 ### How to write thread-safe code
 
 1. Database transations: bundle the things into one action, so a request to join can't happen at the exact same time.
-2. Synchronized methods: mark it as a critical resource to tell it to take turns with word `synchronized`. Could add this to websocket methods in Chess. (not the way pet shop does it)
-3. Synchronized code blocks:
+2. Synchronized methods: mark it as a critical resource to tell it to take turns with word `synchronized`. Could add this to websocket methods in Chess. (not the way pet shop does it). A thread can lock an object and when its done it releases it. It must obtain the lock before running. If another thread has the lock, the thread it put in a queue. Synchronized alone doesn't work because you still need to create a lock. Then, you can synchronize a block of code instead of an entire function.
+Better to do it with atomic objects which are thread safe by definition. As are ConcurrentHashMaps which enfore turn-taking which are thread safe without locking.
 
+## April 6 - Command line builds
+Build = compile or link depending on language. Build it into something that can be deployed or use. You build every time you run.
+Steps
+- retrieving source code
+- downloading/resolving dependencies
+- compiling
+- running automated tests
+- measure test converage
+- packaging compiled code into a distributable format
+- installing/deploying the software
+
+Command-line builds are often preferred. If all the build steps are automated, anyone can do it will simple shell commands. 
+Tools for command line builds: java: maven, gradle; c/c++: make; javascript: npm; python: poetry, pybuilder; shell scripts (universal)
+
+### Maven
+Commands:
+- mvn clean: delete build files (not the source code you wrote). 
+- mvn compile
+- mvn test: runs all test cases
+- mvn install: does all the things. including compile, test, etc.
+Builds output a jar file - a zip file with java code.
+
+Maven Project Structure:
+If you structure you file like src - main, test each with java and resources, then it makes things easy for maven. 
+In a POM file, you can tell it the steps you want it to take. Put a pom file in each folder and then put the dependances and stuff in the root pom.
+pom file contents - dependencies, plugins, reporting, properties, name, url, maven coordinates, model version, etx.
