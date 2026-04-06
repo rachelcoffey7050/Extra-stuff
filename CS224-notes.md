@@ -1005,3 +1005,38 @@ stack return address with data to get it to do what you want.
 3. 0x72243d, 0x72244c
 4. 2a 2a 2a 2a 2a 2a 2a 2a 3d 24 72 00 00 00 00 00 24 42 22 00 00 00 00 00 4c 24 72 00 00 00 00 00 11 22 33 44 55 66 77 88
 **All values are backwards including input.** Also, Do not forget the zeros. You can put a newline every 8 bytes which will make it easier to read.
+
+## April 6
+
+### Example Memory Hierarchy
+Cache: for example, streaming services cache heavily so when you press play it starts quickly. Cache improves performance. 
+
+Memory heirachy - smaller at the top, bigger as it goes down. Each holds things it recives from the level below.
+Lower = larger, slower and cheaper per byte. Higher = smaller, faster, and costlier per byte.
+0. Regs - draw from L1 cache
+1. L1 cache (SRAM)
+2. L2 cache
+3. L3 cache
+4. main memory (DRAM)
+5. Local secondary storage (local disks)
+6. remote secondary storage (web servers)
+We can make smaller transistors, but the access times have flattened out.
+Data is copied in block sized transfer units.
+Anticipates what you will need next. When you access the first element in an array it loads the next few, anticipating what you will need next.
+I/O bridge between main memory and bus interface/cache memory does a lot of work.
+Takes a "warm up" period where it figures out what to put in the cache.
+
+Cache organization. Everything is 2^e of each other. S (set), E (line), B (block). 3 things in a line:
+- "v" = valid. Whether the data is valid or there is nothing there. (This line is being used or not)
+- tag - id to show what data is in the line. You search through the tags to find the right data.
+- B = 2^b bytes per cache block (the data)
+Cache size = SxExB
+
+Cache anatomy practice exercise.
+C: 2^10
+S: 2^10/(2^2 * 2^0) = 2^8 = 256
+s = 8 - log2 (S) - exponent for 2^x of S
+b = 2 - log2(B)
+t = 22 = m - (s+b)
+
+4-way set associative - name of a cache with 4 lines.
