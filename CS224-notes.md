@@ -1040,3 +1040,22 @@ b = 2 - log2(B)
 t = 22 = m - (s+b)
 
 4-way set associative - name of a cache with 4 lines.
+
+## April 8
+Direct-Mapped Cache simulation. 
+How big the cache is: it call hold half of memory.
+
+Cold miss/compolsory miss - nothing is in the cache. 
+Conflict miss - two adresses are going to the same place
+Capacity miss - cache is completely full.
+
+Example - two sets with 2 lines per set. tag = 00, s = next 0, b = last 0
+- address 0 in set 0. Tag 00
+- hit.
+- load in 2 corresponding sets.
+- if they have the first 3 number it's definitly a hit.
+everything else is tag. 3 for set index. block offset 2 (log 4)
+When it's looked up you go to set, tag, offset.
+
+Steps: turn address into binary to fill out the 12. Then look in the cache to see what happens.
+
