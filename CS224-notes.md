@@ -1059,3 +1059,14 @@ When it's looked up you go to set, tag, offset.
 
 Steps: turn address into binary to fill out the 12. Then look in the cache to see what happens.
 
+## April 10
+Practice problem 6.18 - this is the reason we talk about cache. 
+- 512, 256, 50%
+- total number of reads: 2^4 * 2^4 * 2^1 = 2^9 = 512
+- misses: simulate
+- miss rate: divide
+6.19
+- 512,
+- 256,
+- 50%
+- 25%
