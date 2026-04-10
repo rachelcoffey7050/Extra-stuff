@@ -1033,11 +1033,11 @@ Cache organization. Everything is 2^e of each other. S (set), E (line), B (block
 Cache size = SxExB
 
 Cache anatomy practice exercise.
-C: 2^10
-S: 2^10/(2^2 * 2^0) = 2^8 = 256
-s = 8 - log2 (S) - exponent for 2^x of S
-b = 2 - log2(B)
-t = 22 = m - (s+b)
+- C: 2^10
+- S: 2^10/(2^2 * 2^0) = 2^8 = 256
+- s = 8 - log2 (S) - exponent for 2^x of S
+- b = 2 - log2(B)
+- t = 22 = m - (s+b)
 
 4-way set associative - name of a cache with 4 lines.
 
