@@ -1070,3 +1070,10 @@ Practice problem 6.18 - this is the reason we talk about cache.
 - 256,
 - 50%
 - 25%
+
+## Final study guide
+Assembly code heavy - BOM, attack lab. 
+
+Also, cache problems.
+- number of sets S = C/(E*B). use to figure out
+- Figure out the address bytes so you can solve problems like this.
