@@ -1023,3 +1023,20 @@ Maven Project Structure:
 If you structure you file like src - main, test each with java and resources, then it makes things easy for maven. 
 In a POM file, you can tell it the steps you want it to take. Put a pom file in each folder and then put the dependances and stuff in the root pom.
 pom file contents - dependencies, plugins, reporting, properties, name, url, maven coordinates, model version, etx.
+
+## April 13
+Final Exam review
+
+Cryptographic one way hash functions.
+Secure Password Storage including salt
+
+Key size is important. 
+symmetric and asymmetric (or public) keys which are slow. Use asymmetric to send key to symmetric data.
+
+Server authentication - public key certificate.
+
+Concurrency and multi-threaded programming
+Race conditions. 
+Transactions
+
+Command line build. Add extra command files
