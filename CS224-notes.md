@@ -1077,3 +1077,20 @@ Assembly code heavy - BOM, attack lab.
 Also, cache problems.
 - number of sets S = C/(E*B). use to figure out
 - Figure out the address bytes so you can solve problems like this.
+
+## 
+Book reqs: War and Peace.
+
+Perspective and understanding on why you are trying to work through a four-year degree. 
+- education is a tremendous blessing - blessing you don't have to work right now
+
+Anthropic just made a model to make exploits for code vulnerabilities. The humans still have to understand and validate it.
+- don't become complacent. Expect something will go wrong so you are aware of what it is doing
+- what happens if it adds something to your code that is really bad?
+
+Recusion is about inductive arguments.
+Tool veris knows the rules of algebra so it can check you inductive argument.
+
+To ensure you're doing it right: write a spec function, which defines what you want. Prove it is doing it right. Write the function. Test. 
+All this can be done in rust.
+
